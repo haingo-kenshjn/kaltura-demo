@@ -1,3 +1,3 @@
 # kaltura-demo
 
-Install mongodb & ngork to run at local
+Install mongodb & ngrok to run at local
