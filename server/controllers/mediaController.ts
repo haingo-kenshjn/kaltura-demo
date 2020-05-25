@@ -89,13 +89,15 @@ export const getVideos= async (req: Request, res: Response, next: NextFunction) 
                 path: filePath
             });
 
-            const mediaMetadata = mediaService.uploadMedia(filePath, filename, "description").then(result => {});
+            mediaService.uploadMedia(filePath, filename, "description")
+              .then(result => {
+                if(counter == 0){
+                  console.log("writing finished");
+                  const mediaResponse = new GenericResponseValue(result)
+                  res.json(mediaResponse.makeResponse());
+                }
+              });
 
-            if(counter == 0){
-              console.log("writing finished");
-              const mediaResponse = new GenericResponseValue(result)
-              res.json(mediaResponse.makeResponse());
-            }
           });
         });
 

@@ -6,7 +6,7 @@ let ObjectId = mongoose.Schema.ObjectId;
 const mediaSchema = new mongoose.Schema(
   {
     _id: { type: ObjectId , auto: true },
-    externalId: { type : String , unique : true, required : true },
+    externalId: { type : String },
     name: String,
     cdnUrl: String,
     thumbnailUrl: String,
@@ -18,7 +18,8 @@ const mediaSchema = new mongoose.Schema(
 
 mediaSchema.statics.findAll = async function () {
   let medias = await this.find({
-  });
+  })
+  .sort({updatedAt: -1});
  
   return medias;
 };
@@ -34,8 +35,15 @@ mediaSchema.statics.findById = async function (id) {
 mediaSchema.statics.findByExternalAndUpdate = async function (externalId, newData) {
   let media = await this.findOneAndUpdate({
     externalId: externalId,
-  }, 
-  newData, {upsert: false});
+  }, newData, {upsert: false});
+ 
+  return media;
+};
+
+mediaSchema.statics.findByIdAndUpdate = async function (id, newData) {
+  let media = await this.findOneAndUpdate({
+    _id: id,
+  }, newData, {upsert: false});
  
   return media;
 };

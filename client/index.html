@@ -11,22 +11,27 @@
 <body>
     <main class="container">
         <h1 class="title">Kaltura Demo</h1>
-        <div class="filter-links">
-        </div>
-        <form>
-          <div class="form-group">
-            <label for="filter">Search</label>
-            <input type="text" class="form-control" id="filter">
+        <iframe name="votar" style="display:none;"></iframe>
+        <form id="mediaUpload" target="votar">
+          <div>
+            <input id="mediaFile" type="file">
           </div>
+          <button id="btn" type="submit">Upload</button>
         </form>
+        <br/>
+        <div>
+          <input id="refreshBtn" type="button" value="Refesh" style="position: absolute; right: 100px;">
+        </div>
+        <br/>
         <div id="loading">
           <h3>Loading...</h3>
           <video src="https://cdn.flixel.com/flixel/vg5u60m126u7qydd3e9i.phone.mp4" loop autoplay></video>
         </div>
-        <section class="row" id="medias">
+        <section class="row" id="medias" style="top: 100px">
     
         </section>
       </main>
+      <script src="enum.js"></script>
       <script src="main.js"></script>
     </body>
 </html>

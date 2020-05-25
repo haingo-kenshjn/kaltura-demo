@@ -24,8 +24,12 @@ export default {
         return models.Media.findByExternalAndUpdate(id, newMediaData);
     },
 
+    findByIdAndUpdate: async(id: string, newMediaData): Promise<any> => {
+        return models.Media.findByIdAndUpdate(id, newMediaData);
+    },
+
     saveMedia: async(newMedia: any): Promise<any> => {
         const media1 = new models.Media(newMedia);
-        await media1.save();
+        return await media1.save();
     }
 }

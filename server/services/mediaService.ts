@@ -29,14 +29,21 @@ export default {
         let finalChunk = true;
         let resumeAt = -1;
 
-        let kalturaMediaEntry = await kalturaInstance.uploadMedia(fileData, name, description, resume, finalChunk, resumeAt);
-        
-        return await mongodbInstance.saveMedia({
-            externalId: kalturaMediaEntry.id,
-            name: kalturaMediaEntry.name,
-            thumbnailUrl: kalturaMediaEntry.thumbnailUrl,
-            cdnUrl: kalturaMediaEntry.dataUrl,
-            status: kalturaMediaEntry.IMPORT
+        let mediaModel = await mongodbInstance.saveMedia({
+            name: name,
+            status: "7"
         });
+
+        kalturaInstance.uploadMedia(fileData, name, description, resume, finalChunk, resumeAt)
+            .then(kalturaEntry => {
+                mongodbInstance.findByIdAndUpdate(mediaModel._id, {
+                    externalId: kalturaEntry.id,
+                    thumbnailUrl: kalturaEntry.thumbnailUrl,
+                    cdnUrl: kalturaEntry.dataUrl,
+                    status: kalturaEntry.status
+                });
+            })
+        
+        return mediaModel;
     },
 }

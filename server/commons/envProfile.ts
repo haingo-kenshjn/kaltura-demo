@@ -17,7 +17,7 @@ const localProfile = {
   KALTURA_SECRET: "bedbcf0e53c1762bb34c91b7b18c08b2",
   KALTURA_USER_ID: "ngohai.kenshjn@gmail.com",
   KALTURA_PARTNER_ID: 2829381,
-  KALTURA_EXPIRY: 3600,
+  KALTURA_EXPIRY: 86400,
   USER: "user",
   PASSWORD: "password",
   NOTIFICATION_ROUTE : "/notification",
